@@ -35,7 +35,7 @@ public class MainMovement extends LinearOpMode {
         double intakeClaw_SPEED = 0.1;//Servo speed
         double intakeClaw_POSITION = intakeClaw_HOME;//Servo speed
 
-        intakeClaw.setPosition(intakeClaw_HOME);
+         intakeClaw.setPosition(intakeClaw_HOME);
 
 
         waitForStart();
