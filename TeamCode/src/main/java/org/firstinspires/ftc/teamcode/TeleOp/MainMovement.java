@@ -35,7 +35,7 @@ public class MainMovement extends LinearOpMode {
         double intakeClaw_SPEED = 0.1;//Servo speed
         double intakeClaw_POSITION = intakeClaw_HOME;//Servo speed
 
-         intakeClaw.setPosition(intakeClaw_HOME);
+        intakeClaw.setPosition(intakeClaw_HOME);
 
 
         waitForStart();
@@ -69,7 +69,7 @@ public class MainMovement extends LinearOpMode {
             }
 
             if(gamepad1.dpad_up) {
-                intake.setTargetPosition(2);
+                //intake.setTargetPosition(2);
                 intake.setPower(intakeSpeed);
             }else if(gamepad1.dpad_down){
                 intake.setPower(-intakeSpeed);
