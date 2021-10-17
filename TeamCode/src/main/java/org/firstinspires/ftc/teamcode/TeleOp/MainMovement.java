@@ -61,15 +61,14 @@ public class MainMovement extends LinearOpMode {
             m2.setPower(p2);
             m3.setPower(p3);
             m4.setPower(p4);
-            intakeClaw_POSITION = Range.clip(intakeClaw_POSITION,intakeClaw_MIN_RANGE,intakeClaw_MAX_RANGE);
+           /* intakeClaw_POSITION = Range.clip(intakeClaw_POSITION,intakeClaw_MIN_RANGE,intakeClaw_MAX_RANGE);
             if(gamepad1.x) {
                 intakeClaw_POSITION += intakeClaw_SPEED;
             }else{
                 intakeClaw_POSITION -= intakeClaw_SPEED;
             }
-
+*/
             if(gamepad1.dpad_up) {
-                //intake.setTargetPosition(2);
                 intake.setPower(intakeSpeed);
             }else if(gamepad1.dpad_down){
                 intake.setPower(-intakeSpeed);
