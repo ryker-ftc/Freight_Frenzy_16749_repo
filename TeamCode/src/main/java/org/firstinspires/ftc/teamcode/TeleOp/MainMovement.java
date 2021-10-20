@@ -17,14 +17,14 @@ public class MainMovement extends LinearOpMode {
 
     public void runOpMode(){
         //Motors
-        DcMotor m1 = hardwareMap.dcMotor.get("blm");
-        DcMotor m2 = hardwareMap.dcMotor.get("flm");
-        DcMotor m3 = hardwareMap.dcMotor.get("brm");
-        DcMotor m4 = hardwareMap.dcMotor.get("frm");
-        DcMotor intake = hardwareMap.dcMotor.get("Intake");
+        DcMotor backLeftMotor = hardwareMap.dcMotor.get("m0");
+        DcMotor backRightMotor = hardwareMap.dcMotor.get("m1");
+        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("m2");
+        DcMotor backRightMotor = hardwareMap.dcMotor.get("m3");
+        DcMotor intakeMotor = hardwareMap.dcMotor.get("mx1");
         //Motor Settings
-        m1.setDirection(DcMotor.Direction.REVERSE);
-        m2.setDirection(DcMotor.Direction.REVERSE);
+        backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
         double intakeSpeed = 0.03;
         //Servos
         Servo intakeClaw = hardwareMap.servo.get("intakeClaw");
@@ -57,10 +57,10 @@ public class MainMovement extends LinearOpMode {
             p2 /= max;
             p3 /= max;
             p4 /= max;
-            m1.setPower(p1);
-            m2.setPower(p2);
-            m3.setPower(p3);
-            m4.setPower(p4);
+            backLeftMotor.setPower(p1);
+            backRightMotor.setPower(p2);
+            frontLeftMotor.setPower(p3);
+            backRightMotor.setPower(p4);
            /* intakeClaw_POSITION = Range.clip(intakeClaw_POSITION,intakeClaw_MIN_RANGE,intakeClaw_MAX_RANGE);
             if(gamepad1.x) {
                 intakeClaw_POSITION += intakeClaw_SPEED;
@@ -69,18 +69,18 @@ public class MainMovement extends LinearOpMode {
             }
 */
             if(gamepad1.dpad_up) {
-                intake.setPower(intakeSpeed);
+                intakeMotor.setPower(intakeSpeed);
             }else if(gamepad1.dpad_down){
-                intake.setPower(-intakeSpeed);
+                intakeMotor.setPower(-intakeSpeed);
 
             }
 
 
 
-            m1.setPower(0);
-            m2.setPower(0);
-            m3.setPower(0);
-            m4.setPower(0);
+            backLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
+            frontLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
 
         }
 
