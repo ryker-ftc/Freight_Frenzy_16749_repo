@@ -6,8 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 /**
  * This OpMode represents the basic drive opMode.
  *
@@ -20,14 +18,14 @@ public class MainMovement extends LinearOpMode {
         DcMotor backLeftMotor = hardwareMap.dcMotor.get("m0");
         DcMotor backRightMotor = hardwareMap.dcMotor.get("m1");
         DcMotor frontLeftMotor = hardwareMap.dcMotor.get("m2");
-        DcMotor backRightMotor = hardwareMap.dcMotor.get("m3");
+        DcMotor frontRightMotor = hardwareMap.dcMotor.get("m3");
         DcMotor intakeMotor = hardwareMap.dcMotor.get("mx1");
         //Motor Settings
         backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
         double intakeSpeed = 0.03;
         //Servos
-        Servo intakeClaw = hardwareMap.servo.get("intakeClaw");
+        Servo intakeClaw = hardwareMap.servo.get("s1");
         //Servo Settings
         double intakeClaw_HOME = 0.2;// Starting Postion of the servo.
         double intakeClaw_MIN_RANGE = 0.0;//Minimum range of the servo.
@@ -58,16 +56,16 @@ public class MainMovement extends LinearOpMode {
             p3 /= max;
             p4 /= max;
             backLeftMotor.setPower(p1);
-            backRightMotor.setPower(p2);
+            frontRightMotor.setPower(p2);
             frontLeftMotor.setPower(p3);
-            backRightMotor.setPower(p4);
-           /* intakeClaw_POSITION = Range.clip(intakeClaw_POSITION,intakeClaw_MIN_RANGE,intakeClaw_MAX_RANGE);
+            frontRightMotor.setPower(p4);
+           intakeClaw_POSITION = Range.clip(intakeClaw_POSITION,intakeClaw_MIN_RANGE,intakeClaw_MAX_RANGE);
             if(gamepad1.x) {
                 intakeClaw_POSITION += intakeClaw_SPEED;
             }else{
                 intakeClaw_POSITION -= intakeClaw_SPEED;
             }
-*/
+
             if(gamepad1.dpad_up) {
                 intakeMotor.setPower(intakeSpeed);
             }else if(gamepad1.dpad_down){
@@ -78,9 +76,9 @@ public class MainMovement extends LinearOpMode {
 
 
             backLeftMotor.setPower(0);
-            backRightMotor.setPower(0);
+            frontRightMotor.setPower(0);
             frontLeftMotor.setPower(0);
-            backRightMotor.setPower(0);
+            frontRightMotor.setPower(0);
 
         }
 
