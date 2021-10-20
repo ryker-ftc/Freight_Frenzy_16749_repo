@@ -16,13 +16,15 @@ public class MainMovement extends LinearOpMode {
     public void runOpMode(){
         //Motors
         DcMotor backLeftMotor = hardwareMap.dcMotor.get("m0");
-        DcMotor backRightMotor = hardwareMap.dcMotor.get("m1");
-        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("m2");
+        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("m1");
+        DcMotor backRightMotor = hardwareMap.dcMotor.get("m2");
         DcMotor frontRightMotor = hardwareMap.dcMotor.get("m3");
         DcMotor intakeMotor = hardwareMap.dcMotor.get("mx1");
         //Motor Settings
         backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        backRightMotor.setDirection(DcMotor.Direction.FORWARD);
+        frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
         double intakeSpeed = 0.03;
         //Servos
         Servo intakeClaw = hardwareMap.servo.get("s1");
@@ -59,7 +61,7 @@ public class MainMovement extends LinearOpMode {
             frontRightMotor.setPower(p2);
             frontLeftMotor.setPower(p3);
             frontRightMotor.setPower(p4);
-           intakeClaw_POSITION = Range.clip(intakeClaw_POSITION,intakeClaw_MIN_RANGE,intakeClaw_MAX_RANGE);
+            intakeClaw_POSITION = Range.clip(intakeClaw_POSITION,intakeClaw_MIN_RANGE,intakeClaw_MAX_RANGE);
             if(gamepad1.x) {
                 intakeClaw_POSITION += intakeClaw_SPEED;
             }else{
@@ -76,8 +78,8 @@ public class MainMovement extends LinearOpMode {
 
 
             backLeftMotor.setPower(0);
-            frontRightMotor.setPower(0);
             frontLeftMotor.setPower(0);
+            backRightMotor.setPower(0);
             frontRightMotor.setPower(0);
 
         }
