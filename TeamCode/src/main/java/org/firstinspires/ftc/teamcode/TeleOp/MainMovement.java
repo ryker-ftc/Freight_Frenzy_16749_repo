@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /**
- * This OpMode represents the basic drive opMode
+ * This OpMode represents the basic drive opMode.
  *
  */
 @TeleOp(name = "MainMovement(Tele-Op)", group = "Tele-Op")
