@@ -58,7 +58,7 @@ public class setupClass
     public DcMotor  frontRightMotor  = null;
     public DcMotor  backLeftMotor     = null;
     public DcMotor  backRightMotor     = null;
-
+    public DcMotor Intake = null;
 
     /* local OpMode members. */
     HardwareMap hwMap =  null;
