@@ -43,35 +43,37 @@ public class MecanumMovement extends LinearOpMode {
 
     /* Declare OpMode members. */
     setupClass robot           = new setupClass();   // Use a Pushbot's hardware
-    double          clawOffset      = 0;                       // Servo mid position
-    final double    CLAW_SPEED      = 0.02 ;                   // sets rate to move servo
 
     @Override
     public void runOpMode() {
-        double x1; // left and right
-        double y1; // front and back
+        double x1 = 0; // left and right
+        double y1 = 0; // front and back
 
         double fortyFiveInRads = -Math.PI/4;
         double cosine45 = Math.cos(fortyFiveInRads);
         double sine45 = Math.sin(fortyFiveInRads);
 
-        double x2;
-        double y2;
+        double x2 = 0; // left and right + 45 deg. fix.
+        double y2 = 0; // front and back + 45 deg. fix.
 
 
-        /* Initialize the hardware variables.
-         * The init() method of the hardware class does all the work here
-         */
+
         robot.init(hardwareMap);
-
-
-
-        // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
+            double spin = gamepad1.right_stick_x;
+
+            if(Math.abs(spin) > 0.1) {
+                //turn code
+                robot.frontRightMotor.setPower(-spin);
+                robot.backRightMotor.setPower(-spin);
+
+                robot.frontLeftMotor.setPower(spin);
+                robot.backLeftMotor.setPower(spin);
+            }
+            //Drive
             //getting the y value of the joystick(I put a negative because the joystick is flipped.)
             y1 = -gamepad1.left_stick_y;
             //getting the x value of the joystick
@@ -81,19 +83,16 @@ public class MecanumMovement extends LinearOpMode {
             x2 = y1*cosine45 - x1*sine45;
 
 
-            // Output the safe vales to the motor drives.
             robot.frontLeftMotor.setPower(x2);
             robot.backRightMotor.setPower(x2);
 
             robot.frontRightMotor.setPower(y2);
             robot.backLeftMotor.setPower(y2);
 
-
-
-            // Send telemetry message to signify robot running;
-            telemetry.addData("x1",  "%.2f", x1);
-            telemetry.addData("y1", "%.2f", y1);
+            telemetry.addData("x1",  "%.2f", x2);
+            telemetry.addData("y1", "%.2f", y2);
             telemetry.update();
+            //Drive end
 
 
         }
