@@ -42,7 +42,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 public class MecanumMovement extends LinearOpMode {
 
     /* Declare OpMode members. */
-    setupClass robot           = new setupClass();   // Use a Pushbot's hardware
+    setupClass robot           = new setupClass();
 
     @Override
     public void runOpMode() {
