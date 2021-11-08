@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.util.Range;
  * This OpMode represents the basic drive opMode.
  *
  */
-@TeleOp(name = "MainMovement(Tele-Op)", group = "Tele-Op")
-public class MainMovement extends LinearOpMode {
+@TeleOp(name = "Movement(Tele-Op)", group = "Tele-Op")
+public class Movement extends LinearOpMode {
 
     public void runOpMode(){
         setupClass robot = new setupClass();
