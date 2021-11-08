@@ -103,19 +103,19 @@ public class MecanumMovement extends LinearOpMode {
             //Drive end
 
             //Intake
-            intakeClaw_POSITION = Range.clip(intakeClaw_POSITION,intakeClaw_MIN_RANGE,intakeClaw_MAX_RANGE);
-            if(gamepad1.x) {
-                intakeClaw_POSITION += intakeClaw_SPEED;
-            }else{
-                intakeClaw_POSITION -= intakeClaw_SPEED;
-            }
-
-            if(gamepad1.dpad_up) {
-                robot.intakeMotor.setPower(intakeSpeed);
-            }else if(gamepad1.dpad_down){
-                robot.intakeMotor.setPower(-intakeSpeed);
-
-            }
+//            intakeClaw_POSITION = Range.clip(intakeClaw_POSITION,intakeClaw_MIN_RANGE,intakeClaw_MAX_RANGE);
+//            if(gamepad1.x) {
+//                intakeClaw_POSITION += intakeClaw_SPEED;
+//            }else{
+//                intakeClaw_POSITION -= intakeClaw_SPEED;
+//            }
+//
+//            if(gamepad1.dpad_up) {
+//                robot.intakeMotor.setPower(intakeSpeed);
+//            }else if(gamepad1.dpad_down){
+//                robot.intakeMotor.setPower(-intakeSpeed);
+//
+//            }
 
 
         }
