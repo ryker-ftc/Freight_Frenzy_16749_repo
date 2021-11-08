@@ -7,12 +7,13 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.Range;
 
 /**
- * This OpMode represents the basic drive opMode.
+ * This OpMode represents the bas   ic drive opMode.
  *
  */
 @TeleOp(name = "MainMovement(Tele-Op)", group = "Tele-Op")
 public class MainMovement extends LinearOpMode {
-
+    @Override
+    public void runOpMode() throws InterruptedException {
     public void runOpMode(){
         setupClass robot = new setupClass();
         double intakeSpeed = 0.03;

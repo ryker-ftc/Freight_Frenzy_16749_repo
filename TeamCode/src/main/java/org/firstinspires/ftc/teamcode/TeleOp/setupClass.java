@@ -85,7 +85,7 @@ public class setupClass
         frontRightMotor = hwMap.get(DcMotor.class, "m3");
         intakeMotor = hwMap.get(DcMotor.class, "mx1");
         // Define and Initialize Servos
-        intakeClaw = hwMap.servo.get("s1");
+        intakeClaw = hwMap.servo.get("s0");
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -95,7 +95,7 @@ public class setupClass
         frontLeftMotor.setPower(0);
         backLeftMotor.setPower(0);
         frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
+        backRightMotor.setPower(0)
         intakeMotor.setPower(0);
 
         // Set all motors to run without encoders.
