@@ -62,7 +62,7 @@ public class setupClass
     public DcMotor intakeMotor = null;
 
     //Servos
-    public Servo intakeClaw = null;
+  //  public Servo intakeClaw = null;
 
     /* local OpMode members. */
     HardwareMap hwMap =  null;
@@ -85,7 +85,7 @@ public class setupClass
         frontRightMotor = hwMap.get(DcMotor.class, "m3");
         intakeMotor = hwMap.get(DcMotor.class, "mx1");
         // Define and Initialize Servos
-        intakeClaw = hwMap.servo.get("s0");
+//        intakeClaw = hwMap.servo.get("s0");
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -104,7 +104,7 @@ public class setupClass
         backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
     }
  }
