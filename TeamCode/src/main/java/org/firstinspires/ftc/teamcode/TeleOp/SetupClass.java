@@ -51,7 +51,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Servo channel:  Servo to open left claw:  "left_hand"
  * Servo channel:  Servo to open right claw: "right_hand"
  */
-public class setupClass
+public class SetupClass
 {
     /* Public OpMode members. */
     //Motors
@@ -69,7 +69,7 @@ public class setupClass
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
-    public setupClass(){
+    public SetupClass(){
 
     }
 
@@ -95,7 +95,7 @@ public class setupClass
         frontLeftMotor.setPower(0);
         backLeftMotor.setPower(0);
         frontRightMotor.setPower(0);
-        backRightMotor.setPower(0)
+        backRightMotor.setPower(0);
         intakeMotor.setPower(0);
 
         // Set all motors to run without encoders.

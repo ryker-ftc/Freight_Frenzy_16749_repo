@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.Range;
@@ -15,7 +13,7 @@ public class MainMovement extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
     public void runOpMode(){
-        setupClass robot = new setupClass();
+        SetupClass robot = new SetupClass();
         double intakeSpeed = 0.03;
 
         //Servo Settings
