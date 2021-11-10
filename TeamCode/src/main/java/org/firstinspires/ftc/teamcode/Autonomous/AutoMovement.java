@@ -7,14 +7,15 @@ import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
-import org.firstinspires.ftc.teamcode.TeleOp.setupClass;
+import org.firstinspires.ftc.teamcode.TeleOp.SetupClass;
 
 import java.util.Date;
 import java.util.List;
 
 @TeleOp(name = "AutoMovement", group = "AutoMovement")
 public class AutoMovement extends LinearOpMode {
-    setupClass robot = new setupClass();
+    SetupClass robot = new SetupClass();
+
 
     private int duckPosition;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
@@ -45,11 +46,12 @@ public class AutoMovement extends LinearOpMode {
         telemetry.update();
         while (opModeIsActive()) {
             scanDuck();
+            driveit(.5,.5,.5,.5,3000);
         }
 
     }
 
-    private void initVuforia () {
+    private void initVuforia() {
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
@@ -57,6 +59,7 @@ public class AutoMovement extends LinearOpMode {
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
 
     }
+
     private void scanDuck() {
         if (tfod != null) {
             long endTime = new Date().getTime() + 3000;
@@ -83,6 +86,26 @@ public class AutoMovement extends LinearOpMode {
                 }
             }
         }
+    }
+
+    private void driveit(double frontLeftMotor, double backLeftMotor,
+                         double frontRightMotor, double backRightMotor, long sleepTime) {
+
+        robot.backLeftMotor.setPower(backLeftMotor);
+        robot.frontLeftMotor.setPower(frontLeftMotor);
+        robot.frontRightMotor.setPower(frontRightMotor);
+        robot.backRightMotor.setPower(backRightMotor);
+        sleep(sleepTime);
+        robot.frontLeftMotor.setPower(0.0);
+        robot.frontRightMotor.setPower(0.0);
+        robot.backLeftMotor.setPower(0.0);
+        robot.backRightMotor.setPower(0.0);
+
+
+    }
+
+    private int doMath(int num1, int num2) {
+        return num1 + num2;
     }
 
     /**
