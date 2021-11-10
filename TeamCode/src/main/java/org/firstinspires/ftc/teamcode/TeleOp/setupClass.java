@@ -60,6 +60,7 @@ public class setupClass
     public DcMotor  backLeftMotor= null;
     public DcMotor  backRightMotor= null;
     public DcMotor intakeMotor = null;
+    public DcMotor duckSpinner = null;
 
     //Servos
   //  public Servo intakeClaw = null;
@@ -84,6 +85,7 @@ public class setupClass
         backRightMotor= hwMap.get(DcMotor.class, "m2");
         frontRightMotor = hwMap.get(DcMotor.class, "m3");
         intakeMotor = hwMap.get(DcMotor.class, "mx1");
+        duckSpinner = hwMap.get(DcMotor.class, "mx0");
         // Define and Initialize Servos
 //        intakeClaw = hwMap.servo.get("s0");
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -91,12 +93,14 @@ public class setupClass
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
         backRightMotor.setDirection(DcMotor.Direction.FORWARD);
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        duckSpinner.setDirection(DcMotorSimple.Direction.FORWARD);
         // Set all motors to zero power
         frontLeftMotor.setPower(0);
         backLeftMotor.setPower(0);
         frontRightMotor.setPower(0);
-        backRightMotor.setPower(0)
+        backRightMotor.setPower(0);
         intakeMotor.setPower(0);
+        duckSpinner.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
