@@ -10,14 +10,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
- import org.firstinspires.ftc.teamcode.TeleOp.setupClass;
+ import org.firstinspires.ftc.teamcode.TeleOp.SetupClass;
 
 
  @TeleOp(name="Mecanum", group="Pushbot")
 public class MecanumMovement extends LinearOpMode {
 
     /* Declare OpMode members. */
-    setupClass robot           = new setupClass();
+    SetupClass robot = new SetupClass();
 
 
     @Override
@@ -46,12 +46,12 @@ public class MecanumMovement extends LinearOpMode {
         while (opModeIsActive()) {
 
             double spin = gamepad1.right_stick_x;
-
+            double duckPower = gamepad1.a ? 1 : 0;
             if(Math.abs(spin) > 0.1) {
                 //turn code
                 robot.frontRightMotor.setPower(-spin);
                 robot.backRightMotor.setPower(-spin);
-
+                robot.duckSpinner.setPower(duckPower);
                 robot.frontLeftMotor.setPower(spin);
                 robot.backLeftMotor.setPower(spin);
             }
