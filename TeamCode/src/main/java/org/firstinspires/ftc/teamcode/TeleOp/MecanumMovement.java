@@ -26,11 +26,10 @@ public class MecanumMovement extends LinearOpMode {
         double y1 = 0; // front and back
         double x2 = 0; // left and right + 45 deg. fix.
         double y2 = 0; // front and back + 45 deg. fix.
+        //Fixing Controller offset
         double fortyFiveInRads = -Math.PI/4;
         double cosine45 = Math.cos(fortyFiveInRads);
         double sine45 = Math.sin(fortyFiveInRads);
-
-        //Servo Settings
 
         robot.init(hardwareMap);
         waitForStart();
@@ -43,18 +42,18 @@ public class MecanumMovement extends LinearOpMode {
                 //turn code
                 robot.frontRightMotor.setPower(-spin);
                 robot.backRightMotor.setPower(-spin);
+
                 robot.frontLeftMotor.setPower(spin);
                 robot.backLeftMotor.setPower(spin);
             }
             //Drive
-
             //getting the y value of the joystick(I put a negative because the joystick is flipped.)
             y1 = -gamepad1.left_stick_y;
             //getting the x value of the joystick
             x1  =  gamepad1.right_stick_x;
 
             y2 = y1*cosine45 + x1*sine45;
-            x2 = y1*cosine45 - x1*sine45;
+            x2 = x1*cosine45 - y1*sine45;
 
 
             robot.frontLeftMotor.setPower(x2);
@@ -66,7 +65,11 @@ public class MecanumMovement extends LinearOpMode {
             telemetry.addData("x1",  "%.2f", x2);
             telemetry.addData("y1", "%.2f", y2);
             telemetry.update();
+
             //Drive end
+
+            //Attachments code
+            // Duck spinner code
             robot.duckSpinner.setPower(duckPower);
 
         }
