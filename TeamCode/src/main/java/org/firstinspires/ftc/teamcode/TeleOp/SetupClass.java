@@ -30,48 +30,28 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-/**
- * This is NOT an opmode
- *
- * This class can be used to define all the specific hardware for a single robot.
- * In this case that robot is a Pushbot.
- * See PushbotTeleopTank_Iterative and others classes starting with "Pushbot" for usage examples.
- *
- * This hardware class assumes the following device names have been configured on the robot:
- * Note:  All names are lower case and some have single spaces between words.
- *
- * Motor channel:  Left  drive motor:        "left_drive"
- * Motor channel:  Right drive motor:        "right_drive"
- * Motor channel:  Manipulator drive motor:  "left_arm"
- * Servo channel:  Servo to open left claw:  "left_hand"
- * Servo channel:  Servo to open right claw: "right_hand"
- */
-public class setupClass
-{
-    /* Public OpMode members. */
+
+public class SetupClass{
     //Motors
     public DcMotor  frontLeftMotor= null;
     public DcMotor  frontRightMotor= null;
     public DcMotor  backLeftMotor= null;
     public DcMotor  backRightMotor= null;
-    public DcMotor intakeMotor = null;
+    //public DcMotor intakeMotor = null;
+    public DcMotor duckSpinner = null;
 
     //Servos
-    public Servo intakeClaw = null;
+    //public Servo intakeClaw = null;
 
     /* local OpMode members. */
     HardwareMap hwMap =  null;
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
-    public setupClass(){
-
-    }
 
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
@@ -83,20 +63,22 @@ public class setupClass
         frontLeftMotor  = hwMap.get(DcMotor.class, "m1");
         backRightMotor= hwMap.get(DcMotor.class, "m2");
         frontRightMotor = hwMap.get(DcMotor.class, "m3");
-        intakeMotor = hwMap.get(DcMotor.class, "mx1");
+        duckSpinner = hwMap.get(DcMotor.class, "mx0");
+        //intakeMotor = hwMap.get(DcMotor.class, "mx1");
         // Define and Initialize Servos
-        intakeClaw = hwMap.servo.get("s1");
+        //intakeClaw = hwMap.servo.get("s1");
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
         backRightMotor.setDirection(DcMotor.Direction.FORWARD);
-        intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        //intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         // Set all motors to zero power
         frontLeftMotor.setPower(0);
         backLeftMotor.setPower(0);
         frontRightMotor.setPower(0);
         backRightMotor.setPower(0);
-        intakeMotor.setPower(0);
+        //intakeMotor.setPower(0);
+        duckSpinner.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -104,7 +86,8 @@ public class setupClass
         backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        duckSpinner.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
     }
  }

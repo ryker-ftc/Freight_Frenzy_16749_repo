@@ -11,21 +11,11 @@ import com.qualcomm.robotcore.util.Range;
  *
  */
 @TeleOp(name = "MainMovement(Tele-Op)", group = "Tele-Op")
-public class MainMovement extends LinearOpMode {
+public class Movement extends LinearOpMode {
 
     public void runOpMode(){
-        setupClass robot = new setupClass();
+        SetupClass robot = new SetupClass();
         double intakeSpeed = 0.03;
-
-        //Servo Settings
-        double intakeClaw_HOME = 0.2;// Starting Postion of the servo.
-        double intakeClaw_MIN_RANGE = 0.0;//Minimum range of the servo.
-        double intakeClaw_MAX_RANGE = 0.7;//Maximum range of the servo.
-        double intakeClaw_SPEED = 0.1;//Servo speed
-        double intakeClaw_POSITION = intakeClaw_HOME;//Servo speed
-
-        robot.intakeClaw.setPosition(intakeClaw_HOME);
-
 
         waitForStart();
 
@@ -50,20 +40,6 @@ public class MainMovement extends LinearOpMode {
             robot.frontRightMotor.setPower(p2);
             robot.frontLeftMotor.setPower(p3);
             robot.frontRightMotor.setPower(p4);
-            intakeClaw_POSITION = Range.clip(intakeClaw_POSITION,intakeClaw_MIN_RANGE,intakeClaw_MAX_RANGE);
-            if(gamepad1.x) {
-                intakeClaw_POSITION += intakeClaw_SPEED;
-            }else{
-                intakeClaw_POSITION -= intakeClaw_SPEED;
-            }
-
-            if(gamepad1.dpad_up) {
-                robot.intakeMotor.setPower(intakeSpeed);
-            }else if(gamepad1.dpad_down){
-                robot.intakeMotor.setPower(-intakeSpeed);
-
-            }
-
 
             robot.backLeftMotor.setPower(0);
             robot.frontLeftMotor.setPower(0);
