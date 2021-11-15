@@ -70,7 +70,11 @@ public class MecanumMovement extends LinearOpMode {
 
             //Attachments code
             // Duck spinner code
-            robot.duckSpinner.setPower(duckPower);
+            if(gamepad1.a) {
+                robot.duckSpinner.setPower(0.5);
+            }else{
+                robot.duckSpinner.setPower(0.0);
+            }
 
         }
     }
