@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.Autonomous;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
@@ -12,7 +14,7 @@ import org.firstinspires.ftc.teamcode.TeleOp.SetupClass;
 import java.util.Date;
 import java.util.List;
 
-@TeleOp(name = "AutoMovement", group = "AutoMovement")
+@Autonomous(name = "AutoMovement", group = "AutoMovement")
 public class AutoMovement extends LinearOpMode {
     SetupClass robot = new SetupClass();
 
@@ -33,6 +35,7 @@ public class AutoMovement extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        robot.init(hardwareMap);
         initVuforia();
         initTfod();
         if (tfod != null) {
@@ -71,17 +74,19 @@ public class AutoMovement extends LinearOpMode {
                         telemetry.addData("# Object Detected", updatedRecognitions.size());
                         int i = 0;
                         for (Recognition recognition : updatedRecognitions) {
-                            if (LABELS.equals("Duck")) {
+                            String thingFound = recognition.getLabel();
+                            if (thingFound.equals("Duck")) {
                                 duckPosition = 1;
+                                telemetry.addData(String.format("I fonund (%d)", i), thingFound);
+                                telemetry.addData(String.format("I am (%d) sure", i), recognition.getConfidence());
+                                telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
+                                        recognition.getLeft(), recognition.getTop());
+                                telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
+                                        recognition.getRight(), recognition.getBottom());
+                                telemetry.update();
                             }
+                            i++;
                         }
-                        Recognition recognition = null;
-                        telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-                        telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
-                                recognition.getLeft(), recognition.getTop());
-                        telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
-                                recognition.getRight(), recognition.getBottom());
-                        i++;
                     }
                 }
             }
