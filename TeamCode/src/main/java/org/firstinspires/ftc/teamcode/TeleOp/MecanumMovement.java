@@ -24,8 +24,7 @@ public class MecanumMovement extends LinearOpMode {
     public void runOpMode() {
         double x1 = 0; // left and right
         double y1 = 0; // front and back
-        double x2 = 0; // left and right + 45 deg. fix.
-        double y2 = 0; // front and back + 45 deg. fix.
+
         //Fixing Controller offset
         double fortyFiveInRads = -Math.PI/4;
         double cosine45 = Math.cos(fortyFiveInRads);
@@ -33,50 +32,28 @@ public class MecanumMovement extends LinearOpMode {
 
         robot.init(hardwareMap);
         waitForStart();
-        telemetry.addData("---", "Hi driver, robot wishes you a good day :-)");
+
+        //Saying Hi to the driver.
+        telemetry.addData("-", "Hello Driver, Hope you are doing well");
+
         while (opModeIsActive()) {
 
-            double spin = gamepad1.right_stick_x;//For controlling the spin.
-
-            if(Math.abs(spin) > 0.1) {
-                //turn code
-                robot.frontRightMotor.setPower(-spin);
-                robot.backRightMotor.setPower(-spin);
-
-                robot.frontLeftMotor.setPower(spin);
-                robot.backLeftMotor.setPower(spin);
-            }else{
-            //Drive
-
-            //getting the y value of the joystick(I put a negative because the joystick is flipped.)
+            //getting the y-value from the joystick
             y1 = -gamepad1.left_stick_y;
-            //getting the x value of the joystick
-            x1  =  gamepad1.right_stick_x;
+            //getting the x-value from the joystick
+            x1 = gamepad1.right_stick_x;
 
-            y2 = y1*cosine45 + x1*sine45;
-            x2 = x1*cosine45 - y1*sine45;
+            //Setting motor values
+            robot.frontLeftMotor.setPower(y1);
+            robot.frontRightMotor.setPower(y1);
+            robot.backLeftMotor.setPower(y1);
+            robot.backRightMotor.setPower(y1);
 
-
-            robot.frontLeftMotor.setPower(x2);
-            robot.backRightMotor.setPower(x2);
-
-            robot.frontRightMotor.setPower(y2);
-            robot.backLeftMotor.setPower(y2);
-            }
-
-            telemetry.addData("x",  "%.2f", x2);
-            telemetry.addData("y", "%.2f", y2);
+            //Send Telemetry to the console for y1 and x1
+            telemetry.addData("x1:", "%.2f", x1);
+            telemetry.addData("y1:", "%.2f", y1);
             telemetry.update();
 
-            //Drive end
-
-            //Attachments code
-            // Duck spinner code
-            if(gamepad1.a) {
-                robot.duckSpinner.setPower(0.7);
-            }else{
-                robot.duckSpinner.setPower(0.0);
-            }
         }
     }
 }
