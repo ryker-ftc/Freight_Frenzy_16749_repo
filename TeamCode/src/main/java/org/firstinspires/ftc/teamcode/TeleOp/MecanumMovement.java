@@ -33,11 +33,11 @@ public class MecanumMovement extends LinearOpMode {
 
         robot.init(hardwareMap);
         waitForStart();
-
+        telemetry.addData("---", "Hi driver, robot wishes you a good day :-)");
         while (opModeIsActive()) {
 
-            double spin = gamepad1.right_stick_x;
-            double duckPower = gamepad1.a ? 1 : 0;
+            double spin = gamepad1.right_stick_x;//For controlling the spin.
+
             if(Math.abs(spin) > 0.1) {
                 //turn code
                 robot.frontRightMotor.setPower(-spin);
@@ -45,8 +45,9 @@ public class MecanumMovement extends LinearOpMode {
 
                 robot.frontLeftMotor.setPower(spin);
                 robot.backLeftMotor.setPower(spin);
-            }
+            }else{
             //Drive
+
             //getting the y value of the joystick(I put a negative because the joystick is flipped.)
             y1 = -gamepad1.left_stick_y;
             //getting the x value of the joystick
@@ -61,9 +62,10 @@ public class MecanumMovement extends LinearOpMode {
 
             robot.frontRightMotor.setPower(y2);
             robot.backLeftMotor.setPower(y2);
+            }
 
-            telemetry.addData("x1",  "%.2f", x2);
-            telemetry.addData("y1", "%.2f", y2);
+            telemetry.addData("x",  "%.2f", x2);
+            telemetry.addData("y", "%.2f", y2);
             telemetry.update();
 
             //Drive end
