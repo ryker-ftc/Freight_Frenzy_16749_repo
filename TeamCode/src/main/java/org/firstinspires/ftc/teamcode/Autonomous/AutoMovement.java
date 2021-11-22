@@ -40,7 +40,7 @@ public class AutoMovement extends LinearOpMode {
         initTfod();
         if (tfod != null) {
             tfod.activate();
-            tfod.setZoom(2.5, 16.0 / 9.0);
+            tfod.setZoom(1, 16.0 / 9.0);
         }
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
@@ -49,7 +49,7 @@ public class AutoMovement extends LinearOpMode {
         telemetry.update();
         while (opModeIsActive()) {
             scanDuck();
-            driveit(.5,.5,.5,.5,3000);
+// /\           driveit(.5,.5,.5,.5,3000);
         }
 
     }
@@ -77,8 +77,8 @@ public class AutoMovement extends LinearOpMode {
                             String thingFound = recognition.getLabel();
                             if (thingFound.equals("Duck")) {
                                 duckPosition = 1;
-                                telemetry.addData(String.format("I fonund (%d)", i), thingFound);
-                                telemetry.addData(String.format("I am (%d) sure", i), recognition.getConfidence());
+                                telemetry.addData(String.format("I fuond (%d)", i), thingFound);
+                                telemetry.addData(String.format("i hereby conclude that I am in fact (%d) sure", i), recognition.getConfidence());
                                 telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
                                         recognition.getLeft(), recognition.getTop());
                                 telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
