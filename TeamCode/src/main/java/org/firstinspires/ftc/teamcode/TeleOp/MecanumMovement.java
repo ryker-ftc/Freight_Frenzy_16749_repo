@@ -47,14 +47,14 @@ public class MecanumMovement extends LinearOpMode {
 
                 robot.frontLeftMotor.setPower(spin);
                 robot.backLeftMotor.setPower(spin);
-            }else{
+            }
             //Drive
 
             //getting the y value of the joystick(I put a negative because the joystick is flipped.)
             y1 = -gamepad1.left_stick_y;
-            //getting the x value of the joystick
-            x1  =  gamepad1.right_stick_x;
-
+            //getting x value of the joystick
+            x1  =  gamepad1.left_stick_x;
+            //recentering robot joystick(45 deg)
             y2 = y1*cosine45 + x1*sine45;
             x2 = x1*cosine45 - y1*sine45;
 
@@ -64,7 +64,6 @@ public class MecanumMovement extends LinearOpMode {
 
             robot.frontRightMotor.setPower(y2);
             robot.backLeftMotor.setPower(y2);
-            }
 
             telemetry.addData("x",  "%.2f", x2);
             telemetry.addData("y", "%.2f", y2);
