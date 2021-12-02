@@ -40,7 +40,7 @@ public class AutoMovement extends LinearOpMode {
         initTfod();
         if (tfod != null) {
             tfod.activate();
-            tfod.setZoom(2.5, 16.0 / 9.0);
+            tfod.setZoom(1, 16.0 / 9.0);
         }
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
@@ -49,7 +49,7 @@ public class AutoMovement extends LinearOpMode {
         telemetry.update();
         while (opModeIsActive()) {
             scanDuck();
-            driveit(.5,.5,.5,.5,3000);
+// /\           driveit(.5,.5,.5,.5,3000);
         }
 
     }
@@ -75,23 +75,37 @@ public class AutoMovement extends LinearOpMode {
                         int i = 0;
                         for (Recognition recognition : updatedRecognitions) {
                             String thingFound = recognition.getLabel();
+                            Float duckLocaion = recognition.getLeft();
+                            int markerNumber = 0;
                             if (thingFound.equals("Duck")) {
                                 duckPosition = 1;
-                                telemetry.addData(String.format("I fonund (%d)", i), thingFound);
-                                telemetry.addData(String.format("I am (%d) sure", i), recognition.getConfidence());
-                                telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
-                                        recognition.getLeft(), recognition.getTop());
-                                telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
-                                        recognition.getRight(), recognition.getBottom());
-                                telemetry.update();
+                                telemetry.addData("I found a ", thingFound);
+                                telemetry.addData("I am this percent sure ",  recognition.getConfidence());
+                                telemetry.addData("Pixels from left to right",
+                                        recognition.getLeft());
+                                if (duckLocaion < 250) {
+                                    markerNumber = 1;
+                                    telemetry.addData("It is on the left side", markerNumber);
+                                } else {
+                                    if (duckLocaion > 750) {
+                                        markerNumber = 3;
+                                        telemetry.addData("It is on the right side", markerNumber);
+                                    } else {
+                                        markerNumber = 2;
+                                        telemetry.addData("It is in the middle", markerNumber);
+
+                                    }
+                                }
                             }
-                            i++;
+                        telemetry.update();
                         }
+                        i++;
                     }
                 }
             }
         }
     }
+
 
     private void driveit(double frontLeftMotor, double backLeftMotor,
                          double frontRightMotor, double backRightMotor, long sleepTime) {
