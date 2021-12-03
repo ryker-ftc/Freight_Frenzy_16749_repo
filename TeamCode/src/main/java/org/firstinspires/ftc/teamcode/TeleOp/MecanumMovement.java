@@ -18,15 +18,7 @@ public class MecanumMovement extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        double x1 = 0; // left and right
-        double y1 = 0; // front and back
-        double x2 = 0; // fixed 45 deg offset for the x-value
-        double y2 = 0; // fixed 45 deg offset for the y-value
 
-        //Fixing Controller offset
-        double fortyFiveInRads = -Math.PI/4;
-        double cosine45 = Math.cos(fortyFiveInRads);
-        double sine45 = Math.sin(fortyFiveInRads);
 
         robot.init(hardwareMap);
         waitForStart();
@@ -34,48 +26,18 @@ public class MecanumMovement extends LinearOpMode {
 
         while (opModeIsActive()) {
             telemetry.addData("---", "Hi driver, robot wishes you a good day :-)");
-            double spin = gamepad1.right_stick_x;//For controlling the spin.
-            //getting the y value of the joystick(I put a negative because the joystick is flipped.)
-            y1 = -gamepad1.left_stick_y;
-            //getting x value of the joystick
-            x1  =  gamepad1.left_stick_x;
-            //recentering robot joystick(45 deg)
-            y2 = y1*cosine45 + x1*sine45;
-            x2 = x1*cosine45 - y1*sine45;
+            double left_stick_x = gamepad1.left_stick_x;
+            double left_stick_y = -gamepad1.left_stick_y;
+            double spin = gamepad1.right_stick_y - gamepad1.right_stick_x;
+            double backLeftMotorSpeed = -left_stick_x + left_stick_y - spin;
+            double frontLeftMotorSpeed = left_stick_x + left_stick_y + -spin;
+            double frontRightMotorSpeed = -left_stick_x + left_stick_y + spin;
+            double backRightMotorSpeed = left_stick_x + left_stick_y + spin;
 
-            if(Math.abs(spin) > 0.1) {
-                //turn code
-                robot.frontRightMotor.setPower(-spin);
-                robot.backRightMotor.setPower(-spin);
-
-                robot.frontLeftMotor.setPower(spin);
-                robot.backLeftMotor.setPower(spin);
-            }
-            //Drive
-
-            if(gamepad1.dpad_right){
-                robot.backRightMotor.setPower(-1);
-                robot.frontLeftMotor.setPower(-1);
-
-                robot.frontRightMotor.setPower(1);
-                robot.backLeftMotor.setPower(1);
-            }else if(gamepad1.dpad_left){
-                robot.backRightMotor.setPower(-1);
-                robot.frontLeftMotor.setPower(-1);
-
-                robot.frontRightMotor.setPower(1);
-                robot.backLeftMotor.setPower(1);
-            }else{
-            robot.frontLeftMotor.setPower(x2);
-            robot.backRightMotor.setPower(x2);
-
-            robot.frontRightMotor.setPower(y2);
-            robot.backLeftMotor.setPower(y2);
-            }
-
-            telemetry.addData("x",  "%.2f", x2);
-            telemetry.addData("y", "%.2f", y2);
-            telemetry.addData("spin", "%.2f", spin);
+            robot.backLeftMotor.setPower(backLeftMotorSpeed);
+            robot.frontLeftMotor.setPower(frontLeftMotorSpeed);
+            robot.frontRightMotor.setPower(frontRightMotorSpeed);
+            robot.backRightMotor.setPower(backRightMotorSpeed);
 
             if(gamepad1.a) {
                 robot.duckSpinner.setPower(0.7);
