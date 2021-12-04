@@ -43,6 +43,7 @@ public class SetupClass{
     public DcMotor  backRightMotor= null;
     public DcMotor intakeMotor = null;
     public DcMotor duckSpinner = null;
+    public Servo intakeClaw = null;
 
     //Servos
     //public Servo intakeClaw = null;
@@ -58,27 +59,33 @@ public class SetupClass{
         // Save reference to Hardware map
         hwMap = ahwMap;
 
-        // Define and Initialize Motors
-        backLeftMotor= hwMap.get(DcMotor.class, "m0");
-        frontLeftMotor  = hwMap.get(DcMotor.class, "m1");
-        backRightMotor= hwMap.get(DcMotor.class, "m2");
-        frontRightMotor = hwMap.get(DcMotor.class, "m3");
-        duckSpinner = hwMap.get(DcMotor.class, "mx0");
-        intakeMotor = hwMap.get(DcMotor.class, "mx1");
+        // Define and Initialize Motors and Servo
+        DcMotor backLeftMotor = hwMap.dcMotor.get("m0");
+        DcMotor frontLeftMotor = hwMap.dcMotor.get("m1");
+        DcMotor frontRightMotor = hwMap.dcMotor.get("m2");
+        DcMotor backRightMotor = hwMap.dcMotor.get("m3");
+        DcMotor duckSpinner = hwMap.dcMotor.get("mx0");
+        DcMotor intakeMotor = hwMap.dcMotor.get("mx1");
+        Servo intakeClaw = hwMap.servo.get("s1");
+
         // Define and Initialize Servos
         //intakeClaw = hwMap.servo.get("s1");
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
         backRightMotor.setDirection(DcMotor.Direction.FORWARD);
-        //intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        // Set all motors to zero power
+        intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+
+        // Set all motors to zero power and servos
         frontLeftMotor.setPower(0);
         backLeftMotor.setPower(0);
         frontRightMotor.setPower(0);
         backRightMotor.setPower(0);
         intakeMotor.setPower(0);
         duckSpinner.setPower(0);
+        intakeClaw.setPosition(0);
+
+        //Variables for Servos
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -86,7 +93,7 @@ public class SetupClass{
         backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         duckSpinner.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
     }
