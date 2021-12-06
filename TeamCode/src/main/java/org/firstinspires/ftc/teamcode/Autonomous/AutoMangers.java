@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
@@ -14,11 +15,17 @@ import org.firstinspires.ftc.teamcode.TeleOp.SetupClass;
 import java.util.Date;
 import java.util.List;
 
-@Autonomous(name = "AutoMovement", group = "AutoMovement")
-public class AutoMovement extends LinearOpMode {
+public class AutoMangers {
     SetupClass robot = new SetupClass();
+    LinearOpMode startedProgram;
+    Telemetry telemetry;
+    String location;
 
-
+    public AutoMangers ( LinearOpMode startedProgram, String location ) {
+        this.startedProgram = startedProgram;
+        telemetry = startedProgram.telemetry;
+        this.location = location;
+    }
     private int duckPosition;
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
     private static final String[] LABELS = {
@@ -33,9 +40,9 @@ public class AutoMovement extends LinearOpMode {
     private VuforiaLocalizer vuforia;
     private TFObjectDetector tfod;
 
-    @Override
+
     public void runOpMode() throws InterruptedException {
-        robot.init(hardwareMap);
+        robot.init(startedProgram.hardwareMap);
         initVuforia();
         initTfod();
         if (tfod != null) {
@@ -44,15 +51,10 @@ public class AutoMovement extends LinearOpMode {
         }
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
-        waitForStart();
         telemetry.addData("Mode", "running");
         telemetry.update();
-        while (opModeIsActive()) {
-            scanDuck();
-// /\           driveit(.5,.5,.5,.5,3000);
-        }
-
     }
+
 
     private void initVuforia() {
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
@@ -80,7 +82,7 @@ public class AutoMovement extends LinearOpMode {
                             if (thingFound.equals("Duck")) {
                                 duckPosition = 1;
                                 telemetry.addData("I found a ", thingFound);
-                                telemetry.addData("I am this percent sure ",  recognition.getConfidence());
+                                telemetry.addData("I am this percent sure ", recognition.getConfidence());
                                 telemetry.addData("Pixels from left to right",
                                         recognition.getLeft());
                                 if (duckLocaion < 250) {
@@ -97,7 +99,7 @@ public class AutoMovement extends LinearOpMode {
                                     }
                                 }
                             }
-                        telemetry.update();
+                            telemetry.update();
                         }
                         i++;
                     }
@@ -114,7 +116,7 @@ public class AutoMovement extends LinearOpMode {
         robot.frontLeftMotor.setPower(frontLeftMotor);
         robot.frontRightMotor.setPower(frontRightMotor);
         robot.backRightMotor.setPower(backRightMotor);
-        sleep(sleepTime);
+        startedProgram.sleep(sleepTime);
         robot.frontLeftMotor.setPower(0.0);
         robot.frontRightMotor.setPower(0.0);
         robot.backLeftMotor.setPower(0.0);
@@ -131,8 +133,8 @@ public class AutoMovement extends LinearOpMode {
      * Initialize the TensorFlow Object Detection engine.
      */
     private void initTfod() {
-        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
-                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        int tfodMonitorViewId = startedProgram.hardwareMap.appContext.getResources().getIdentifier(
+                "tfodMonitorViewId", "id", startedProgram.hardwareMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfodParameters.minResultConfidence = 0.8f;
         tfodParameters.isModelTensorFlow2 = true;
