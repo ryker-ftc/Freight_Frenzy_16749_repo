@@ -66,7 +66,6 @@ public class SetupClass{
         intakeMotor = hwMap.get(DcMotor.class, "mx1");
         // Define and Initialize Servos
 
-        intakeClaw = hwMap.servo.get("s1");
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);

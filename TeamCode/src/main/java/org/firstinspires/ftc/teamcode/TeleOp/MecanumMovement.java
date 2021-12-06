@@ -2,10 +2,9 @@ package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.Range;
 
 
-@TeleOp(name = "Mecanum", group = "Tele-op")
+@TeleOp(name = "Mecanum2.0", group = "Tele-op")
 public class MecanumMovement extends LinearOpMode {
 
     /* Declare OpMode members. */
@@ -15,11 +14,11 @@ public class MecanumMovement extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        final double INTAKE_HOME = 0.0;
-        final double INTAKE_SPEED = 0.1;
-        final double INTAKE_MAX = 0.45;
-        final double INTAKE_MIN = 0.0;
-        double INTAKE_POSITION = INTAKE_HOME;
+//        final double INTAKE_HOME = 0.0;
+//        final double INTAKE_SPEED = 0.1;
+//        final double INTAKE_MAX = 0.45;
+//        final double INTAKE_MIN = 0.0;
+//        double INTAKE_POSITION = INTAKE_HOME;
         waitForStart();
         while (opModeIsActive()) {
             telemetry.addData("---", "Hi driver, robot wishes you a good day :-)");
@@ -42,7 +41,6 @@ public class MecanumMovement extends LinearOpMode {
                 robot.duckSpinner.setPower(0.0);
             }
 
-
             if (gamepad1.dpad_up) {
                 robot.intakeMotor.setPower(0.08);
             } else if (gamepad1.dpad_down) {
@@ -50,13 +48,13 @@ public class MecanumMovement extends LinearOpMode {
             } else {
                 robot.intakeMotor.setPower(0);
             }
-            if (gamepad1.x) {
-                INTAKE_POSITION += INTAKE_SPEED;
-            }else if(gamepad1.b) {
-                INTAKE_POSITION -= INTAKE_SPEED;
-            }
-            robot.intakeClaw.setPosition(INTAKE_POSITION);
-            Range.clip(INTAKE_POSITION, INTAKE_MIN,INTAKE_MAX);
+//            if (gamepad1.x) {
+//                INTAKE_POSITION += INTAKE_SPEED;
+//            }else if(gamepad1.b) {
+//                INTAKE_POSITION -= INTAKE_SPEED;
+//            }
+//            robot.intakeClaw.setPosition(INTAKE_POSITION);
+//            Range.clip(INTAKE_POSITION, INTAKE_MIN,INTAKE_MAX);
         }
 
     }
